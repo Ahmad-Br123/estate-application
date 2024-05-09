@@ -7,7 +7,7 @@ import userRouter from './routes/user.route.js'
 import authRouter from './routes/auth.route.js'
 import listingRouter from './routes/listing.route.js'
 import path from 'path';
-const PORT = 3003;
+const PORT = 3003 || 3000;
 
 const app = express();
 app.use(cors());
@@ -33,10 +33,10 @@ app.use((err, req, res ,next)=>{
         message,
     });
 });
-mongoose.connect("mongodb://admin:admin@localhost:27017/todo?authSource=admin")
+mongoose.connect("mongodb://admin:admin@127.0.0.1:27017/todo?authSource=admin")
     .then(() => {
         console.log('MongoDB Connected successfully');
-        app.listen(PORT, () => {
+        app.listen(PORT, '0.0.0.0',() => {
             console.log(`app listen to port :${PORT}`)
         });
     })
